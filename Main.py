@@ -13,10 +13,10 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
         # Signals and Slots
-        self.ui.btnHelloWorld.clicked.connect(self._handle_button)
+        self.ui.btnHelloWorld.clicked.connect(lambda: self._handle_button("lala"))
 
-    def _handle_button(self):
-        self.ui.btnRefreshInstances.setText("HELLO COCHON !!!")
+    def _handle_button(self, args):
+        self.ui.btnRefreshInstances.setText(args)
 
 
 # Main Function
