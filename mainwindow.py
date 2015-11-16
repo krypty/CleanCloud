@@ -1,0 +1,90 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'res/gui/mainwindow.ui'
+#
+# Created by: PyQt5 UI code generator 5.5.1
+#
+# WARNING! All changes made in this file will be lost!
+
+from PyQt5 import QtCore, QtGui, QtWidgets
+
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(800, 600)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
+        self.centralwidget.setObjectName("centralwidget")
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.centralwidget)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.btnHelloWorld = QtWidgets.QPushButton(self.centralwidget)
+        self.btnHelloWorld.setObjectName("btnHelloWorld")
+        self.verticalLayout_2.addWidget(self.btnHelloWorld)
+        self.gridLayout = QtWidgets.QGridLayout()
+        self.gridLayout.setSizeConstraint(QtWidgets.QLayout.SetDefaultConstraint)
+        self.gridLayout.setObjectName("gridLayout")
+        self.verticalLayout_7 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_7.setObjectName("verticalLayout_7")
+        self.listView_4 = QtWidgets.QListView(self.centralwidget)
+        self.listView_4.setObjectName("listView_4")
+        self.verticalLayout_7.addWidget(self.listView_4)
+        self.pushButton_5 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_5.setObjectName("pushButton_5")
+        self.verticalLayout_7.addWidget(self.pushButton_5)
+        self.gridLayout.addLayout(self.verticalLayout_7, 1, 1, 1, 1)
+        self.verticalLayout_3 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_3.setObjectName("verticalLayout_3")
+        self.listView = QtWidgets.QListView(self.centralwidget)
+        self.listView.setObjectName("listView")
+        self.verticalLayout_3.addWidget(self.listView)
+        self.btnRefreshInstances = QtWidgets.QPushButton(self.centralwidget)
+        self.btnRefreshInstances.setObjectName("btnRefreshInstances")
+        self.verticalLayout_3.addWidget(self.btnRefreshInstances)
+        self.gridLayout.addLayout(self.verticalLayout_3, 0, 0, 1, 1)
+        self.verticalLayout_4 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_4.setObjectName("verticalLayout_4")
+        self.listView_2 = QtWidgets.QListView(self.centralwidget)
+        self.listView_2.setObjectName("listView_2")
+        self.verticalLayout_4.addWidget(self.listView_2)
+        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_3.setObjectName("pushButton_3")
+        self.verticalLayout_4.addWidget(self.pushButton_3)
+        self.gridLayout.addLayout(self.verticalLayout_4, 0, 1, 1, 1)
+        self.verticalLayout_6 = QtWidgets.QVBoxLayout()
+        self.verticalLayout_6.setObjectName("verticalLayout_6")
+        self.listView_3 = QtWidgets.QListView(self.centralwidget)
+        self.listView_3.setObjectName("listView_3")
+        self.verticalLayout_6.addWidget(self.listView_3)
+        self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButton_4.setObjectName("pushButton_4")
+        self.verticalLayout_6.addWidget(self.pushButton_4)
+        self.gridLayout.addLayout(self.verticalLayout_6, 1, 0, 1, 1)
+        self.verticalLayout_2.addLayout(self.gridLayout)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 26))
+        self.menubar.setObjectName("menubar")
+        self.menuFile = QtWidgets.QMenu(self.menubar)
+        self.menuFile.setObjectName("menuFile")
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
+        self.statusbar.setObjectName("statusbar")
+        MainWindow.setStatusBar(self.statusbar)
+        self.actionQuit = QtWidgets.QAction(MainWindow)
+        self.actionQuit.setObjectName("actionQuit")
+        self.menuFile.addAction(self.actionQuit)
+        self.menubar.addAction(self.menuFile.menuAction())
+
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+    def retranslateUi(self, MainWindow):
+        _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        self.btnHelloWorld.setText(_translate("MainWindow", "Hello World"))
+        self.pushButton_5.setText(_translate("MainWindow", "PushButton"))
+        self.btnRefreshInstances.setText(_translate("MainWindow", "Refresh instances"))
+        self.pushButton_3.setText(_translate("MainWindow", "PushButton"))
+        self.pushButton_4.setText(_translate("MainWindow", "PushButton"))
+        self.menuFile.setTitle(_translate("MainWindow", "File"))
+        self.actionQuit.setText(_translate("MainWindow", "Quit"))
+
