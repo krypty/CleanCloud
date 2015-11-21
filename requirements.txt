@@ -1,0 +1,3 @@
+boto==2.38.0
+#PyQt5==5.5.1 # you need to install it from sources http://pyqt.sourceforge.net/Docs/PyQt5/installation.html
+#SIP==4.17 # you need to install it from sources http://pyqt.sourceforge.net/Docs/sip4/installation.html
