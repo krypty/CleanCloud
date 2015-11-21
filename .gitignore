@@ -148,3 +148,5 @@ crashlytics-build.properties
 
 PyQt-gpl-5.5.1
 sip-4.17
+
+credentials/
