@@ -146,3 +146,5 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 
+PyQt-gpl-5.5.1
+sip-4.17
