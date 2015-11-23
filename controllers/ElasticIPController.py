@@ -4,7 +4,7 @@ import boto.ec2
 
 class ElasticIPController(BaseController):
 
-    def __init__(self, conn, exceptionHandler):
+    def __init__(self, conn, exceptionHandler = None):
         super(ElasticIPController, self).__init__(conn, exceptionHandler)
         self._listPertinentTags = ['public_ip', 'instance_id', 'allocation_id' 'private_ip_address']
 

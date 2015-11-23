@@ -4,7 +4,7 @@ import boto.ec2
 
 class InstanceController(BaseController):
 
-    def __init__(self, conn, exceptionHandler):
+    def __init__(self, conn, exceptionHandler = None):
         super(InstanceController, self).__init__(conn, exceptionHandler)
         self._listPertinentTags = ['id', 'image_id', 'region', 'instance_type', 'ip_address', 'private_ip_address', 'state']
 
