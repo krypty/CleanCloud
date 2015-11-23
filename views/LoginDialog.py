@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import QDialog, QMessageBox
 from gen.gui.LoginDialog import Ui_Dialog
 from views.MainWindow import MainWindow
 from tools.ReadConfig import read_config
+from controllers.InstanceController import InstanceController
+
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
 class LoginDialog(QDialog):
@@ -41,6 +43,7 @@ class LoginDialog(QDialog):
             conn = boto.ec2.connect_to_region(region,
                                               aws_access_key_id=access_key_id,
                                               aws_secret_access_key=secret_key_id)
+
             mv = MainWindow(conn)
             mv.show()
             self.close()
