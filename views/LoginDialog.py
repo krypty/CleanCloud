@@ -18,7 +18,7 @@ class LoginDialog(QDialog):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
 
-        self.ui.cbx_region.addItems([r.name for r in boto.ec2.regions()])
+        self.ui.cbx_region.addItems(sorted([r.name for r in boto.ec2.regions()]))
 
         # Signals and Slots
         self.ui.btn_login.clicked.connect(self._btn_login_clicked)
