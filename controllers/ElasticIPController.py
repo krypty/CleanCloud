@@ -23,22 +23,20 @@ class ElasticIPController(BaseController):
             self._exceptionHandler.handle(e);
 
     def delete(self, listItems):
-        try:
-            for ip in listItems:
+        for ip in listItems:
+            try:
                 if ip.instance_id:
                     ip.disassociate()
                 ip.release()
-        except Exception as e:
-            self._exceptionHandler.handle(e)
+            except Exception as e:
+                self._exceptionHandler.handle(e)
 
     def _build_items_dict(self):
         itemsDict = dict()
-        try:
-            addresses = self._conn.get_all_addresses()
-            for addr in addresses:
+        addresses = self._conn.get_all_addresses()
+        for addr in addresses:
+            try:
                 itemsDict[addr.public_ip] = addr
-        except Exception as e:
-            self._exceptionHandler.handle(e)
+            except Exception as e:
+                self._exceptionHandler.handle(e)
         return itemsDict
-
-

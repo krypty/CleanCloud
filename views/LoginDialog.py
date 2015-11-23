@@ -6,6 +6,7 @@ from views.MainWindow import MainWindow
 from tools.ReadConfig import read_config
 from controllers.InstanceController import InstanceController
 from controllers.ElasticIPController import ElasticIPController
+from controllers.ImageControllers import ImageController
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -44,13 +45,9 @@ class LoginDialog(QDialog):
             conn = boto.ec2.connect_to_region(region,
                                               aws_access_key_id=access_key_id,
                                               aws_secret_access_key=secret_key_id)
-            control = ElasticIPController(conn, None)
-            print(control.get_simple_names())
-            control.delete(control.get_selected_items(control.get_simple_names()))
-            print(control.get_simple_names())
 
-            # mv = MainWindow(conn)
-            # mv.show()
+            mv = MainWindow(conn)
+            mv.show()
             self.close()
 
         except boto.exception.EC2ResponseError:
