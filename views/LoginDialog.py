@@ -1,7 +1,7 @@
 import boto.ec2
 import boto.exception
 from PyQt5.QtWidgets import QDialog, QMessageBox
-from gen.gui.LoginDialog import Ui_Dialog
+from gen.gui.login_dialog import Ui_Dialog
 from views.MainWindow import MainWindow
 from tools.ReadConfig import read_config
 from controllers.InstanceController import InstanceController

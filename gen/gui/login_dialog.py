@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'res/gui/login_dialog.ui'
+# Form implementation generated from reading ui file 'login_dialog.ui'
 #
 # Created by: PyQt5 UI code generator 5.5.1
 #
@@ -23,9 +23,12 @@ class Ui_Dialog(object):
         self.label_2.setObjectName("label_2")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.LabelRole, self.label_2)
         self.le_access_key_id = QtWidgets.QLineEdit(Dialog)
+        self.le_access_key_id.setAutoFillBackground(True)
         self.le_access_key_id.setObjectName("le_access_key_id")
         self.formLayout.setWidget(0, QtWidgets.QFormLayout.FieldRole, self.le_access_key_id)
         self.le_secret_key_id = QtWidgets.QLineEdit(Dialog)
+        self.le_secret_key_id.setAutoFillBackground(True)
+        self.le_secret_key_id.setEchoMode(QtWidgets.QLineEdit.Password)
         self.le_secret_key_id.setObjectName("le_secret_key_id")
         self.formLayout.setWidget(1, QtWidgets.QFormLayout.FieldRole, self.le_secret_key_id)
         self.cbx_region = QtWidgets.QComboBox(Dialog)
@@ -51,7 +54,7 @@ class Ui_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "CleanCloud"))
         self.label.setText(_translate("Dialog", "Secret access key: "))
         self.label_2.setText(_translate("Dialog", "Access key id: "))
         self.label_3.setText(_translate("Dialog", "Region"))

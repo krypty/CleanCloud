@@ -19,7 +19,7 @@ class MainWindow(QMainWindow):
         # print(sc_groups)
 
         # Signals and Slots
-        self.ui.btnHelloWorld.clicked.connect(lambda: self._handle_button("lala"))
+        self.ui.btn_refresh.clicked.connect(lambda: self._handle_button("lala"))
 
     def _handle_button(self, args):
-        self.ui.btnRefreshInstances.setText(args)
+        self.ui.btn_refresh.setText(args)
