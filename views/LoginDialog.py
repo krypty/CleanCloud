@@ -2,6 +2,8 @@ import boto.ec2
 import boto.exception
 from PyQt5.QtWidgets import QDialog, QMessageBox
 from gen.gui.LoginDialog import Ui_Dialog
+from views.MainWindow import MainWindow
+from tools.ReadConfig import read_config
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
 class LoginDialog(QDialog):
@@ -20,16 +22,16 @@ class LoginDialog(QDialog):
     def _btn_login_clicked(self):
 
         # here we ask the user to give us its credentials
-        access_key_id = self.ui.le_access_key_id.text()
-        secret_key_id = self.ui.le_secret_key_id.text()
+        # access_key_id = self.ui.le_access_key_id.text()
+        # secret_key_id = self.ui.le_secret_key_id.text()
 
         # note: for us select: eu-central-1
         region = self.ui.cbx_region.itemText(self.ui.cbx_region.currentIndex())
 
         # or we can imagine that if a file credentials.ini is present we use it directly
-        # config = read_config(r'credentials/credentials.ini')
-        # access_key_id = config["auth"]["ACCESS_KEY"]
-        # secret_key_id = config["auth"]["SECRET_KEY"]
+        config = read_config(r'credentials/credentials.ini')
+        access_key_id = config["auth"]["ACCESS_KEY"]
+        secret_key_id = config["auth"]["SECRET_KEY"]
 
         print("access_key_id:", access_key_id)
         print("secret_key_id:", secret_key_id)
@@ -39,9 +41,9 @@ class LoginDialog(QDialog):
             conn = boto.ec2.connect_to_region(region,
                                               aws_access_key_id=access_key_id,
                                               aws_secret_access_key=secret_key_id)
-
-            sc_groups = conn.get_all_security_groups()
-            print(sc_groups)
+            mv = MainWindow(conn)
+            mv.show()
+            self.close()
 
         except boto.exception.EC2ResponseError:
             msg = "Impossible to log in using these credentials.\n" \

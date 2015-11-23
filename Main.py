@@ -1,16 +1,6 @@
-import configparser
 import sys
 from views.LoginDialog import LoginDialog
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
-from views.MainWindow import MainWindow
-
-
-def read_config(filename):
-    config = configparser.ConfigParser()
-    config.read(filename)
-
-    return config
-
+from PyQt5.QtWidgets import QApplication
 
 # Main Function
 if __name__ == '__main__':
@@ -19,8 +9,6 @@ if __name__ == '__main__':
 
     login_dialog = LoginDialog()
     login_dialog.show()
-    mv = MainWindow()
-    mv.show()
 
     # Execute the Application and Exit
     myApp.exec_()
