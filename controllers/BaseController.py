@@ -4,7 +4,7 @@ class BaseController:
 
     def __init__(self, conn, exceptionHandler = None):
         self._conn = conn
-        self._itemsDict = self._build_items_dict()
+        self.refresh()
         if exceptionHandler is None:
             self._exceptionHandler = defaultHandler()
         else:
@@ -36,7 +36,7 @@ class BaseController:
         pass
 
     def refresh(self):
-        self._build_items_dict
+        self._itemsDict = self._build_items_dict()
 
     @abstractmethod
     def _build_items_dict(self):
@@ -46,4 +46,4 @@ class BaseController:
 class defaultHandler:
 
     def handle(self, e):
-        print(e)
+        print("[error]", e)
