@@ -2,18 +2,30 @@ from abc import ABCMeta, abstractmethod
 
 class BaseController:
 
-    def __init__(self, conn, exceptionHandler):
+    def __init__(self, conn, exceptionHandler = None):
         self._conn = conn
         self._itemsDict = self._build_items_dict()
-        self._exceptionHandler = exceptionHandler
+        if exceptionHandler is None:
+            self._exceptionHandler = defaultHandler()
+        else:
+            self._exceptionHandler = exceptionHandler
 
-    @abstractmethod
     def get_simple_names(self):
-        pass
+        if self._itemsDict is not None:
+            return list(self._itemsDict.keys())
+        return list()
 
-    @abstractmethod
-    def get_selected_items(self, listNames):
-        pass
+    def get_selected_items(self, listIds):
+        listObjects = list()
+        try:
+            if self._itemsDict is not None:
+                for id in listIds:
+                    if id in list(self._itemsDict.keys()):
+                        listObjects.append(self._itemsDict[id])
+        except Exception as e:
+            self._exceptionHandler.handle(e)
+
+        return listObjects
 
     @abstractmethod
     def get_item_details(self, item):
@@ -23,12 +35,15 @@ class BaseController:
     def delete(self, listItems):
         pass
 
+    def refresh(self):
+        self._build_items_dict
+
     @abstractmethod
     def _build_items_dict(self):
         pass
-        # try:
-        #     print("todo lol")
-        #     return None
-        # except Exception as e:
-        #     print(e)
-        #     # TODO call exception handler
+
+
+class defaultHandler:
+
+    def handle(self, e):
+        print(e)
