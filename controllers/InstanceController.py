@@ -12,7 +12,12 @@ class InstanceController(BaseController):
         result = dict()
         try:
             if item is not None:
-                result['name'] = item.tags['Name']
+                try:
+                    if len(item.tags['Name']) > 0:
+                        result['name'] = item.tags['Name']
+                except:
+                    pass
+
                 for key in item.__dict__.keys():
                     info = item.__dict__[key]
                     if key in self._listPertinentTags:
