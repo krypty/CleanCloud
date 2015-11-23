@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>CleanCloud</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -31,10 +31,21 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="le_access_key_id"/>
+      <widget class="QLineEdit" name="le_access_key_id">
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="le_secret_key_id"/>
+      <widget class="QLineEdit" name="le_secret_key_id">
+       <property name="autoFillBackground">
+        <bool>true</bool>
+       </property>
+       <property name="echoMode">
+        <enum>QLineEdit::Password</enum>
+       </property>
+      </widget>
      </item>
      <item row="2" column="1">
       <widget class="QComboBox" name="cbx_region"/>
