@@ -22,9 +22,8 @@ class InstanceController(BaseController):
                     if key in self._listPertinentTags:
                         info = getattr(item, key)
                         if isinstance(info, boto.ec2.RegionInfo):
-                            result[key] = info.name
-                        else:
-                            result[key] = info
+                            info = info.name
+                        result[key] = str(info)
         except Exception as e:
             self._exceptionHandler.handle(e)
 

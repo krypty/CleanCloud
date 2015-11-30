@@ -16,9 +16,8 @@ class ElasticIPController(BaseController):
                     info = getattr(item, key)
                     if key in self._listPertinentTags:
                         if isinstance(info, boto.ec2.RegionInfo):
-                            result[key] = info.name
-                        else:
-                            result[key] = info
+                            info = info.name
+                        result[key] = str(info)
         except Exception as e:
             self._exceptionHandler.handle(e);
         return result
