@@ -1,16 +1,20 @@
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QLabel
+from PyQt5.QtGui import QFont
 
 from gen.gui.instances_view import Ui_Form
 from controllers.InstanceController import InstanceController
 
 
 class InstancesView(QWidget):
+
     def __init__(self, conn):
         super(QWidget, self).__init__()
 
         # Attributes
         self.controller = InstanceController(conn=conn)
+        self._form_label_font = QFont()
+        self._form_label_font.setBold(True)
 
         # Set up the user interface from Designer.
         self.ui = Ui_Form()
@@ -41,7 +45,7 @@ class InstancesView(QWidget):
         self._refresh_gui()
 
     def _on_item_selection_changed(self):
-        self.ui.lbl_details_data.clear()
+        self._clear_layout(self.ui.fl_details_data)
 
         selected_item_count = len(self.ui.lw_instances.selectedItems())
         self._update_item_count_in_gui(selected_item_count)
@@ -51,12 +55,13 @@ class InstancesView(QWidget):
             selected_items = self.controller.get_selected_items([selected_item_str])
             item_details = self.controller.get_item_details(selected_items[0])
 
-            # TODO better string formatting
-            item_details_str = ""
             for key, value in item_details.items():
-                item_details_str += "%s, %s\n" % (key, value)
+                lbl_name = QLabel(key)
+                lbl_name.setFont(self._form_label_font)
 
-            self.ui.lbl_details_data.setText(item_details_str)
+                lbl_value = QLabel(value)
+
+                self.ui.fl_details_data.addRow(lbl_name, lbl_value)
 
     def _update_item_count_in_gui(self, count):
         if count > 0:
@@ -66,3 +71,9 @@ class InstancesView(QWidget):
         else:
             self.ui.btn_delete.setText("Delete")
             self.ui.btn_stop.setText("Stop")
+
+    @staticmethod
+    def _clear_layout(layout):
+        while layout.count():
+            child = layout.takeAt(0)
+            child.widget().deleteLater()
