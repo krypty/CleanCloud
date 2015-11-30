@@ -24,6 +24,7 @@ class InstancesView(QWidget):
         self.ui.btn_refresh.clicked.connect(self._refresh_gui)
         self.ui.lw_instances.itemSelectionChanged.connect(self._on_item_selection_changed)
         self.ui.btn_delete.clicked.connect(self._on_btn_delete_clicked)
+        self.ui.btn_select_all.clicked.connect(self._on_btn_select_all_clicked)
 
         self._refresh_gui()
 
@@ -71,6 +72,9 @@ class InstancesView(QWidget):
         else:
             self.ui.btn_delete.setText("Delete")
             self.ui.btn_stop.setText("Stop")
+
+    def _on_btn_select_all_clicked(self):
+        self.ui.lw_instances.selectAll()
 
     @staticmethod
     def _clear_layout(layout):
