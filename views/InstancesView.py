@@ -1,6 +1,7 @@
 from views.BaseBlockView import BaseBlockView
 from controllers.InstanceController import InstanceController
 from PyQt5.QtWidgets import QPushButton
+from PyQt5.QtGui import QIcon
 
 
 class InstancesView(BaseBlockView):
@@ -10,6 +11,7 @@ class InstancesView(BaseBlockView):
         # Attributes
         self._btn_stop = QPushButton()
         self._btn_stop.setText("Stop")
+        self._btn_stop.setIcon(QIcon.fromTheme("process-stop"))
         self.ui.l_bottom.insertWidget(2, self._btn_stop)
 
         # Signals and Slots
