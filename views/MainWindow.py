@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QMainWindow, QListView
 from gen.gui.mainwindow import Ui_MainWindow
 from views.InstancesView import InstancesView
+from views.ElasticIPView import ElasticIPView
+from views.ImageView import ImageView
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -34,10 +36,12 @@ class MainWindow(QMainWindow):
 
     def _add_blocks_into_grid(self):
         instances_view = InstancesView(conn=self._conn)
+        elastic_ip_view = ElasticIPView(conn=self._conn)
+        image_view = ImageView(conn=self._conn)
 
         self.ui.gl_blocks.addWidget(instances_view, 0, 0)
+        self.ui.gl_blocks.addWidget(elastic_ip_view, 1, 0)
+        self.ui.gl_blocks.addWidget(image_view, 0, 1)
 
         # TODO add reals views
-        self.ui.gl_blocks.addWidget(QListView(), 0, 1)
-        self.ui.gl_blocks.addWidget(QListView(), 1, 0)
         self.ui.gl_blocks.addWidget(QListView(), 1, 1)

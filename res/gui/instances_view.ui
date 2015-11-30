@@ -126,7 +126,7 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_3">
+    <layout class="QHBoxLayout" name="l_bottom">
      <item>
       <widget class="QPushButton" name="btn_select_all">
        <property name="text">
@@ -146,13 +146,6 @@
         </size>
        </property>
       </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_stop">
-       <property name="text">
-        <string>Stop</string>
-       </property>
-      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="btn_delete">
