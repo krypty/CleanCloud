@@ -15,7 +15,19 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="lbl_title">
+       <property name="font">
+        <font>
+         <pointsize>15</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>Instances</string>
+       </property>
+      </widget>
+     </item>
      <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
@@ -34,21 +46,12 @@
        <property name="text">
         <string>Refresh</string>
        </property>
+       <property name="icon">
+        <iconset theme="view-refresh"/>
+       </property>
       </widget>
      </item>
     </layout>
-   </item>
-   <item>
-    <widget class="QLabel" name="lbl_title">
-     <property name="font">
-      <font>
-       <pointsize>15</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Instances</string>
-     </property>
-    </widget>
    </item>
    <item>
     <layout class="QGridLayout" name="gridLayout" rowstretch="1" columnstretch="1,1">
@@ -103,7 +106,7 @@
              <x>0</x>
              <y>0</y>
              <width>252</width>
-             <height>212</height>
+             <height>244</height>
             </rect>
            </property>
            <property name="autoFillBackground">
@@ -132,6 +135,9 @@
        <property name="text">
         <string>Select All</string>
        </property>
+       <property name="icon">
+        <iconset theme="edit-select-all"/>
+       </property>
       </widget>
      </item>
      <item>
@@ -151,6 +157,9 @@
       <widget class="QPushButton" name="btn_delete">
        <property name="text">
         <string>Delete</string>
+       </property>
+       <property name="icon">
+        <iconset theme="list-remove"/>
        </property>
       </widget>
      </item>

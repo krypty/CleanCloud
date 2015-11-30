@@ -41,12 +41,18 @@
         <property name="text">
          <string>Refresh all</string>
         </property>
+        <property name="icon">
+         <iconset theme="view-refresh"/>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="btn_delete_all">
         <property name="text">
          <string>Delete all</string>
+        </property>
+        <property name="icon">
+         <iconset theme="list-remove"/>
         </property>
        </widget>
       </item>
