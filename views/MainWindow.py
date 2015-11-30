@@ -3,6 +3,7 @@ from gen.gui.mainwindow import Ui_MainWindow
 from views.InstancesView import InstancesView
 from views.ElasticIPView import ElasticIPView
 from views.ImageView import ImageView
+from views.VolumesView import VolumesView
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -38,10 +39,9 @@ class MainWindow(QMainWindow):
         instances_view = InstancesView(conn=self._conn)
         elastic_ip_view = ElasticIPView(conn=self._conn)
         image_view = ImageView(conn=self._conn)
+        volumes_view = VolumesView(conn=self._conn)
 
         self.ui.gl_blocks.addWidget(instances_view, 0, 0)
         self.ui.gl_blocks.addWidget(elastic_ip_view, 1, 0)
         self.ui.gl_blocks.addWidget(image_view, 0, 1)
-
-        # TODO add reals views
-        self.ui.gl_blocks.addWidget(QListView(), 1, 1)
+        self.ui.gl_blocks.addWidget(volumes_view, 1, 1)
