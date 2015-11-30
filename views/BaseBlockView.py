@@ -54,7 +54,7 @@ class BaseBlockView(QWidget):
             item_details = self._controller.get_item_details(selected_items[0])
 
             for key, value in item_details.items():
-                lbl_name = QLabel(" ".join(key.split("_")))
+                lbl_name = QLabel(" ".join(key.split("_")).strip())  # remove underscores
                 lbl_name.setFont(self._form_label_font)
 
                 lbl_value = QLabel(value)
