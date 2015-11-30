@@ -14,7 +14,8 @@ class ImageController(BaseController):
                 print(item.__dict__)
                 for key in item.__dict__.keys():
                     if key in self._listPertinentTags:
-                        result[key] = info = item.__dict__[key]
+                        info = getattr(item, key)
+                        result[key] = info
         except Exception as e:
             self._exceptionHandler.handle(e);
         return result

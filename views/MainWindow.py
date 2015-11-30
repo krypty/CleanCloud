@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
 
         self._add_blocks_into_grid()
 
+
         # debuging purpose
         # sc_groups = conn.get_all_security_groups()
         # print(sc_groups)

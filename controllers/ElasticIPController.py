@@ -6,14 +6,14 @@ class ElasticIPController(BaseController):
 
     def __init__(self, conn, exceptionHandler = None):
         super(ElasticIPController, self).__init__(conn, exceptionHandler)
-        self._listPertinentTags = ['public_ip', 'instance_id', 'allocation_id' 'private_ip_address']
+        self._listPertinentTags = ['public_ip', 'instance_id', 'allocation_id' 'private_ip_address', 'region']
 
     def get_item_details(self, item):
         result = dict()
         try:
             if item is not None:
                 for key in item.__dict__.keys():
-                    info = item.__dict__[key]
+                    info = getattr(item, key)
                     if key in self._listPertinentTags:
                         if isinstance(info, boto.ec2.RegionInfo):
                             result[key] = info.name
@@ -21,6 +21,7 @@ class ElasticIPController(BaseController):
                             result[key] = info
         except Exception as e:
             self._exceptionHandler.handle(e);
+        return result
 
     def delete(self, listItems):
         for ip in listItems:
