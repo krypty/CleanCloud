@@ -17,18 +17,22 @@ class BaseBlockView(QWidget):
         self.ui.setupUi(self)
 
         # Signals and Slots
-        self.ui.btn_refresh.clicked.connect(self._refresh_gui)
+        self.ui.btn_refresh.clicked.connect(self.refresh_gui)
         self.ui.lw_instances.itemSelectionChanged.connect(self._on_item_selection_changed)
         self.ui.btn_delete.clicked.connect(self._on_btn_delete_clicked)
         self.ui.btn_select_all.clicked.connect(self._on_btn_select_all_clicked)
 
         self._replace_default_text()
-        self._refresh_gui()
+        self.refresh_gui()
 
     def _handle_button(self, args):
         self.ui.btn_refresh.setText(args)
 
-    def _refresh_gui(self):
+    def delete_all(self):
+        self._on_btn_select_all_clicked()
+        self._on_btn_delete_clicked()
+
+    def refresh_gui(self):
         self._controller.refresh()
         names = self._controller.get_simple_names()
         print("refresh_gui", names)
@@ -40,7 +44,7 @@ class BaseBlockView(QWidget):
         selected_items = self._controller.get_selected_items(selected_items_str)
         self._controller.delete(selected_items)
 
-        self._refresh_gui()
+        self.refresh_gui()
 
     def _on_item_selection_changed(self):
         self._clear_layout(self.ui.fl_details_data)
