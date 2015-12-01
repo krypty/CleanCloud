@@ -1,6 +1,8 @@
 import boto.ec2
 import boto.exception
 from PyQt5.QtWidgets import QDialog, QMessageBox
+from PyQt5.QtCore import Qt
+
 from gen.gui.login_dialog import Ui_Dialog
 from views.MainWindow import MainWindow
 from tools.ReadConfig import read_config
@@ -43,8 +45,9 @@ class LoginDialog(QDialog):
                                               aws_secret_access_key=secret_key_id)
 
             mv = MainWindow(conn)
+            mv.setWindowModality(Qt.ApplicationModal)
             mv.show()
-            self.close()
+            # self.close()
 
         except boto.exception.EC2ResponseError:
             msg = "Impossible to log in using these credentials.\n" \

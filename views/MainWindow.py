@@ -4,6 +4,7 @@ from views.InstancesView import InstancesView
 from views.ElasticIPView import ElasticIPView
 from views.ImageView import ImageView
 from views.VolumesView import VolumesView
+from PyQt5.QtCore import QCoreApplication
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -22,7 +23,6 @@ class MainWindow(QMainWindow):
 
         self._add_blocks_into_grid()
 
-
         # debuging purpose
         # sc_groups = conn.get_all_security_groups()
         # print(sc_groups)
@@ -31,6 +31,8 @@ class MainWindow(QMainWindow):
         # TODO add signal/slots for delete all and refresh all
         self.ui.btn_delete_all.clicked.connect(lambda: self._handle_button("lala"))
         self.ui.btn_refresh_all.clicked.connect(lambda: self._handle_button("lala"))
+        self.ui.action_menu_logout.triggered.connect(self._on_logout_clicked)
+        self.ui.action_menu_quit.triggered.connect(self._on_quit_clicked)
 
     def _handle_button(self, args):
         self.ui.btn_refresh_all.setText(args)
@@ -45,3 +47,9 @@ class MainWindow(QMainWindow):
         self.ui.gl_blocks.addWidget(elastic_ip_view, 1, 0)
         self.ui.gl_blocks.addWidget(image_view, 0, 1)
         self.ui.gl_blocks.addWidget(volumes_view, 1, 1)
+
+    def _on_logout_clicked(self):
+        self.close()
+
+    def _on_quit_clicked(self):
+        QCoreApplication.instance().quit()
