@@ -7,6 +7,7 @@ from tools.ReadConfig import read_config
 from controllers.InstanceController import InstanceController
 from controllers.ElasticIPController import ElasticIPController
 from controllers.ImageControllers import ImageController
+import os.path
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -18,24 +19,19 @@ class LoginDialog(QDialog):
         self.ui = Ui_Dialog()
         self.ui.setupUi(self)
 
+        self._load_and_prefill_crendential()
+
         self.ui.cbx_region.addItems(sorted([r.name for r in boto.ec2.regions()]))
 
         # Signals and Slots
         self.ui.btn_login.clicked.connect(self._btn_login_clicked)
 
     def _btn_login_clicked(self):
-
-        # here we ask the user to give us its credentials
-        # access_key_id = self.ui.le_access_key_id.text()
-        # secret_key_id = self.ui.le_secret_key_id.text()
+        access_key_id = self.ui.le_access_key_id.text()
+        secret_key_id = self.ui.le_secret_key_id.text()
 
         # note: for us select: eu-central-1
         region = self.ui.cbx_region.itemText(self.ui.cbx_region.currentIndex())
-
-        # or we can imagine that if a file credentials.ini is present we use it directly
-        config = read_config(r'credentials/credentials.ini')
-        access_key_id = config["auth"]["ACCESS_KEY"]
-        secret_key_id = config["auth"]["SECRET_KEY"]
 
         print("access_key_id:", access_key_id)
         print("secret_key_id:", secret_key_id)
@@ -55,3 +51,19 @@ class LoginDialog(QDialog):
                   "Please check your credentials and regions"
 
             QMessageBox.critical(self, "Cannot login!", msg)
+
+    def _load_and_prefill_crendential(self):
+        credential_filename = r'credentials/credentials.ini'
+
+        if not os.path.isfile(credential_filename):
+            return
+
+        try:
+            config = read_config(credential_filename)
+            access_key_id = config["auth"]["ACCESS_KEY"]
+            secret_key_id = config["auth"]["SECRET_KEY"]
+
+            self.ui.le_access_key_id.setText(access_key_id)
+            self.ui.le_secret_key_id.setText(secret_key_id)
+        except:
+            pass
