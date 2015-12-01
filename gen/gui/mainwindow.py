@@ -59,6 +59,8 @@ class Ui_MainWindow(object):
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
         self.action_menu_quit = QtWidgets.QAction(MainWindow)
+        icon = QtGui.QIcon.fromTheme("application-exit")
+        self.action_menu_quit.setIcon(icon)
         self.action_menu_quit.setObjectName("action_menu_quit")
         self.action_menu_logout = QtWidgets.QAction(MainWindow)
         self.action_menu_logout.setObjectName("action_menu_logout")

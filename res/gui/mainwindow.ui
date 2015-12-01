@@ -42,7 +42,8 @@
          <string>Refresh all</string>
         </property>
         <property name="icon">
-         <iconset theme="view-refresh"/>
+         <iconset theme="view-refresh">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>
@@ -52,7 +53,8 @@
          <string>Delete all</string>
         </property>
         <property name="icon">
-         <iconset theme="list-remove"/>
+         <iconset theme="list-remove">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>
@@ -80,6 +82,9 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_menu_quit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
    <property name="text">
     <string>Quit</string>
    </property>
