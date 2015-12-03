@@ -57,14 +57,15 @@ class MainWindow(QMainWindow):
             view.refresh_gui()
 
     def _on_console_toggled(self, toogled):
-        self.ui.tb_console.append("toogled: %s" % toogled)
-        # TODO
+        if not toogled:
+            self._show_console()
+        else:
+            self._hide_console()
 
     @pyqtSlot(list)
     def _on_new_console_message(self, listMessage):
         htmlText = "<br />".join(listMessage)
         self.ui.tb_console.setHtml(htmlText)
-
 
     def _add_blocks_into_grid(self):
         self.ui.gl_blocks.addWidget(self._instances_view, 0, 0)
@@ -77,3 +78,9 @@ class MainWindow(QMainWindow):
 
     def _on_quit_clicked(self):
         QCoreApplication.instance().quit()
+
+    def _show_console(self):
+        self.ui.tb_console.setVisible(False)
+
+    def _hide_console(self):
+        self.ui.tb_console.setVisible(True)
