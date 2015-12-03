@@ -45,6 +45,7 @@ class MainWindow(QMainWindow):
         self.ui.btn_refresh_all.clicked.connect(lambda: self._on_btn_refresh_all_clicked())
         self.ui.action_menu_logout.triggered.connect(self._on_logout_clicked)
         self.ui.action_menu_quit.triggered.connect(self._on_quit_clicked)
+        self.ui.gbx_console.toggled.connect(self._on_console_toggled)
 
     def _on_btn_delete_all_clicked(self):
         for view in self._views:
@@ -54,6 +55,10 @@ class MainWindow(QMainWindow):
     def _on_btn_refresh_all_clicked(self):
         for view in self._views:
             view.refresh_gui()
+
+    def _on_console_toggled(self, toogled):
+        self.ui.tb_console.append("toogled: %s" % toogled)
+        # TODO
 
     def _add_blocks_into_grid(self):
         self.ui.gl_blocks.addWidget(self._instances_view, 0, 0)
