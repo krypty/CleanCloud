@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>578</width>
-    <height>382</height>
+    <width>558</width>
+    <height>308</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -47,7 +47,8 @@
         <string>Refresh</string>
        </property>
        <property name="icon">
-        <iconset theme="view-refresh"/>
+        <iconset theme="view-refresh">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
@@ -82,7 +83,7 @@
        <property name="minimumSize">
         <size>
          <width>280</width>
-         <height>250</height>
+         <height>160</height>
         </size>
        </property>
        <property name="title">
@@ -106,7 +107,7 @@
              <x>0</x>
              <y>0</y>
              <width>252</width>
-             <height>244</height>
+             <height>170</height>
             </rect>
            </property>
            <property name="autoFillBackground">
@@ -136,7 +137,8 @@
         <string>Select All</string>
        </property>
        <property name="icon">
-        <iconset theme="edit-select-all"/>
+        <iconset theme="edit-select-all">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
@@ -159,7 +161,8 @@
         <string>Delete</string>
        </property>
        <property name="icon">
-        <iconset theme="list-remove"/>
+        <iconset theme="list-remove">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>

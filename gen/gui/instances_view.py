@@ -11,7 +11,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName("Form")
-        Form.resize(578, 382)
+        Form.resize(558, 308)
         self.verticalLayout = QtWidgets.QVBoxLayout(Form)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
@@ -44,7 +44,7 @@ class Ui_Form(object):
         self.verticalLayout_2.addWidget(self.lw_instances)
         self.gridLayout.addWidget(self.gbx_list, 0, 0, 1, 1)
         self.gbx_details = QtWidgets.QGroupBox(Form)
-        self.gbx_details.setMinimumSize(QtCore.QSize(280, 250))
+        self.gbx_details.setMinimumSize(QtCore.QSize(280, 160))
         self.gbx_details.setObjectName("gbx_details")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.gbx_details)
         self.verticalLayout_3.setObjectName("verticalLayout_3")
@@ -54,7 +54,7 @@ class Ui_Form(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 252, 244))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 252, 170))
         self.scrollAreaWidgetContents.setAutoFillBackground(False)
         self.scrollAreaWidgetContents.setStyleSheet("background-color:transparent;")
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
