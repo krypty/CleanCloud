@@ -1,14 +1,18 @@
 from PyQt5.QtWidgets import QWidget, QLabel
 from PyQt5.QtGui import QFont
 from gen.gui.instances_view import Ui_Form
+from handlers.GuiHandler import GuiHandler
+from PyQt5.QtCore import pyqtSignal
 
 
 class BaseBlockView(QWidget):
-    def __init__(self, conn, controller):
+
+    def __init__(self, conn, controller, consoleCallback):
         super(QWidget, self).__init__()
 
         # Attributes
-        self._controller = controller(conn=conn)
+        self._handler = GuiHandler(30, consoleCallback)
+        self._controller = controller(conn=conn, handler=self._handler)
         self._form_label_font = QFont()
         self._form_label_font.setBold(True)
 
@@ -21,6 +25,7 @@ class BaseBlockView(QWidget):
         self.ui.lw_instances.itemSelectionChanged.connect(self._on_item_selection_changed)
         self.ui.btn_delete.clicked.connect(self._on_btn_delete_clicked)
         self.ui.btn_select_all.clicked.connect(self._on_btn_select_all_clicked)
+
 
         self._replace_default_text()
         self.refresh_gui()
@@ -42,7 +47,8 @@ class BaseBlockView(QWidget):
     def _on_btn_delete_clicked(self):
         selected_items_str = [item.text() for item in self.ui.lw_instances.selectedItems()]
         selected_items = self._controller.get_selected_items(selected_items_str)
-        self._controller.delete(selected_items)
+        if len(selected_items) > 0:
+            self._controller.delete(selected_items)
 
         self.refresh_gui()
 
@@ -77,6 +83,7 @@ class BaseBlockView(QWidget):
 
     def _replace_default_text(self):
         raise NotImplemented()
+
 
     @staticmethod
     def _clear_layout(layout):

@@ -5,6 +5,7 @@ from views.ElasticIPView import ElasticIPView
 from views.ImageView import ImageView
 from views.VolumesView import VolumesView
 from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtCore import pyqtSlot
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -21,10 +22,10 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self._instances_view = InstancesView(conn=self._conn)
-        self._elastic_ip_view = ElasticIPView(conn=self._conn)
-        self._image_view = ImageView(conn=self._conn)
-        self._volumes_view = VolumesView(conn=self._conn)
+        self._instances_view = InstancesView(conn=self._conn, consoleCallback=self._on_new_console_message)
+        self._elastic_ip_view = ElasticIPView(conn=self._conn, consoleCallback=self._on_new_console_message)
+        self._image_view = ImageView(conn=self._conn, consoleCallback=self._on_new_console_message)
+        self._volumes_view = VolumesView(conn=self._conn, consoleCallback=self._on_new_console_message)
 
         self._views = [
             self._instances_view,
@@ -40,7 +41,6 @@ class MainWindow(QMainWindow):
         # print(sc_groups)
 
         # Signals and Slots
-        # TODO add signal/slots for delete all and refresh all
         self.ui.btn_delete_all.clicked.connect(lambda: self._on_btn_delete_all_clicked())
         self.ui.btn_refresh_all.clicked.connect(lambda: self._on_btn_refresh_all_clicked())
         self.ui.action_menu_logout.triggered.connect(self._on_logout_clicked)
@@ -59,6 +59,12 @@ class MainWindow(QMainWindow):
     def _on_console_toggled(self, toogled):
         self.ui.tb_console.append("toogled: %s" % toogled)
         # TODO
+
+    @pyqtSlot(list)
+    def _on_new_console_message(self, listMessage):
+        htmlText = "<br />".join(listMessage)
+        self.ui.tb_console.setHtml(htmlText)
+
 
     def _add_blocks_into_grid(self):
         self.ui.gl_blocks.addWidget(self._instances_view, 0, 0)

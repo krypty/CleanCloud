@@ -4,8 +4,8 @@ import boto.ec2
 
 class ElasticIPController(BaseController):
 
-    def __init__(self, conn, exceptionHandler = None):
-        super(ElasticIPController, self).__init__(conn, exceptionHandler)
+    def __init__(self, conn, handler=None):
+        super(ElasticIPController, self).__init__(conn, handler)
         self._listPertinentTags = ['public_ip', 'instance_id', 'allocation_id' 'private_ip_address', 'region']
 
     def get_item_details(self, item):
@@ -19,7 +19,7 @@ class ElasticIPController(BaseController):
                             info = info.name
                         result[key] = str(info)
         except Exception as e:
-            self._exceptionHandler.handle(e);
+            self._handler.handle_error(e.message);
         return result
 
     def delete(self, listItems):
@@ -28,8 +28,9 @@ class ElasticIPController(BaseController):
                 if ip.instance_id:
                     ip.disassociate()
                 ip.release()
+                self._handler.handle_message("Elastic IP %s has been released"%ip.public_ip)
             except Exception as e:
-                self._exceptionHandler.handle(e)
+                self._handler.handle_error(e.message);
 
     def _build_items_dict(self):
         itemsDict = dict()
@@ -38,5 +39,5 @@ class ElasticIPController(BaseController):
             try:
                 itemsDict[addr.public_ip] = addr
             except Exception as e:
-                self._exceptionHandler.handle(e)
+                self._handler.handle_error(e.message);
         return itemsDict

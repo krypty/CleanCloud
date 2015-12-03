@@ -1,14 +1,15 @@
 from abc import ABCMeta, abstractmethod
+from handlers.BaseHandler import BaseHandler
 
 class BaseController:
 
-    def __init__(self, conn, exceptionHandler = None):
+    def __init__(self, conn, handler=None):
         self._conn = conn
         self.refresh()
-        if exceptionHandler is None:
-            self._exceptionHandler = defaultHandler()
+        if handler is None:
+            self._handler = defaultHandler()
         else:
-            self._exceptionHandler = exceptionHandler
+            self._handler = handler
 
     def get_simple_names(self):
         if self._itemsDict is not None:
@@ -43,7 +44,16 @@ class BaseController:
         pass
 
 
-class defaultHandler:
+class defaultHandler(BaseHandler):
 
-    def handle(self, e):
-        print("[error]", e)
+    def handle_warning(self, warning):
+        print(warning)
+
+    def handle_info(self, info):
+        print(info)
+
+    def handle_error(self, error):
+        print(error)
+
+    def handle_message(self, message):
+        print(message)

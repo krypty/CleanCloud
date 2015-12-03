@@ -5,8 +5,8 @@ from PyQt5.QtGui import QIcon
 
 
 class InstancesView(BaseBlockView):
-    def __init__(self, conn):
-        super(InstancesView, self).__init__(conn, InstanceController)
+    def __init__(self, conn, consoleCallback):
+        super(InstancesView, self).__init__(conn, InstanceController, consoleCallback)
 
         # Attributes
         self._btn_stop = QPushButton()
@@ -18,8 +18,10 @@ class InstancesView(BaseBlockView):
         self._btn_stop.clicked.connect(self._on_btn_stop_clicked)
 
     def _on_btn_stop_clicked(self):
-        # TODO...
-        raise NotImplemented()
+        selected_items_str = [item.text() for item in self.ui.lw_instances.selectedItems()]
+        selected_items = self._controller.get_selected_items(selected_items_str)
+        if len(selected_items) > 0:
+            self._controller.stop(selected_items)
 
     def _replace_default_text(self):
         self.ui.lbl_title.setText("Instances")

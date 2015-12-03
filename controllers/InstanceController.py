@@ -4,8 +4,8 @@ import boto.ec2
 
 class InstanceController(BaseController):
 
-    def __init__(self, conn, exceptionHandler = None):
-        super(InstanceController, self).__init__(conn, exceptionHandler)
+    def __init__(self, conn, handler=None):
+        super(InstanceController, self).__init__(conn, handler)
         self._listPertinentTags = ['id', 'image_id', 'region', 'instance_type', 'ip_address', 'private_ip_address', '_state']
 
     def get_item_details(self, item):
@@ -25,7 +25,7 @@ class InstanceController(BaseController):
                             info = info.name
                         result[key] = str(info)
         except Exception as e:
-            self._exceptionHandler.handle(e)
+            self._handler.handle_error(e.message);
 
         return result
 
@@ -36,8 +36,20 @@ class InstanceController(BaseController):
 
         try:
             self._conn.terminate_instances(instance_ids=listIds)
+            self._handler.handle_message("Instances with ids(%s) have been terminated" % " ".join(listIds))
         except Exception as e:
-            self._exceptionHandler.handle(e)
+            self._handler.handle_error(e.message);
+
+    def stop(self, listItems):
+        listIds = list()
+        for instance in listItems:
+            listIds.append(instance.id)
+
+        try:
+            self._conn.stop_instances(instance_ids=listIds)
+            self._handler.handle_message("Instances with ids(%s) have been stopped" % " ".join(listIds))
+        except Exception as e:
+            self._handler.handle_error(e.message);
 
     def _build_items_dict(self):
         itemsDict = dict()
@@ -48,6 +60,6 @@ class InstanceController(BaseController):
                 if instance.state != "terminated" and instance.state != "shutting-down":
                     itemsDict[instance.id] = instance
         except Exception as e:
-            self._exceptionHandler.handle(e)
+            self._handler.handle_error(e.message);
         return itemsDict
 

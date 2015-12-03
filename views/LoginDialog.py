@@ -6,10 +6,8 @@ from PyQt5.QtCore import Qt
 from gen.gui.login_dialog import Ui_Dialog
 from views.MainWindow import MainWindow
 from tools.ReadConfig import read_config
-from controllers.InstanceController import InstanceController
-from controllers.ElasticIPController import ElasticIPController
-from controllers.ImageControllers import ImageController
 import os.path
+from datetime import datetime
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -22,6 +20,7 @@ class LoginDialog(QDialog):
         self.ui.setupUi(self)
 
         self._load_and_prefill_crendential()
+        print(datetime.now().time())
 
         self.ui.cbx_region.addItems(sorted([r.name for r in boto.ec2.regions()]))
 

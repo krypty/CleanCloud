@@ -3,8 +3,8 @@ from controllers.ElasticIPController import ElasticIPController
 
 
 class ElasticIPView(BaseBlockView):
-    def __init__(self, conn):
-        super(ElasticIPView, self).__init__(conn, ElasticIPController)
+    def __init__(self, conn, consoleCallback):
+        super(ElasticIPView, self).__init__(conn, ElasticIPController, consoleCallback)
 
     def _replace_default_text(self):
         self.ui.lbl_title.setText("Elastic IPs")
