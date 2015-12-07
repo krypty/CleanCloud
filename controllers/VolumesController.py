@@ -23,12 +23,13 @@ class VolumesController(BaseController):
                         try:
                             self._conn.detach_volume(volume_id=volume.id, instance_id=id, force=True)
                             self._handler.handle_info("Volume %s has been detached before deletion" % volume.id)
-                        except Exception as e:
-                            self._handler.handle_info(e.message)
+                        except:
+                            pass
                 self._conn.delete_volume(volume.id)
                 self._handler.handle_message("Volume %s has been deleted" % volume.id)
             except Exception as e:
                 self._handler.handle_error(e.message)
+                self._handler.handle_info("Forcing volume deletion")
 
     def get_item_details(self, item):
         result = dict()
