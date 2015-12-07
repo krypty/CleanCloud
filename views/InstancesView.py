@@ -5,8 +5,8 @@ from PyQt5.QtGui import QIcon
 
 
 class InstancesView(BaseBlockView):
-    def __init__(self, conn, consoleCallback):
-        super(InstancesView, self).__init__(conn, InstanceController, consoleCallback)
+    def __init__(self, conn, handler):
+        super(InstancesView, self).__init__(conn, InstanceController, handler)
 
         # Attributes
         self._btn_stop = QPushButton()

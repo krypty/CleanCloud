@@ -18,16 +18,17 @@ class VolumesController(BaseController):
                     volumesInstances = [i for r in volumesReservations for i in r.instances]
                     ids = [i.id for i in volumesInstances]
                     self._conn.terminate_instances(instance_ids=ids)
+                    self._handler.handle_info("Instances %s have been terminated before volume deletion." % " ".join(ids))
                     for id in ids:
                         try:
                             self._conn.detach_volume(volume_id=volume.id, instance_id=id, force=True)
-                            self._handler.handle_message("Volume %s has been detached before deletion" % volume.id)
-                        except:
-                            pass
+                            self._handler.handle_info("Volume %s has been detached before deletion" % volume.id)
+                        except Exception as e:
+                            self._handler.handle_info(e.message)
                 self._conn.delete_volume(volume.id)
-                self._handler.handle_message("Volume %s has been deleted"%volume.id)
+                self._handler.handle_message("Volume %s has been deleted" % volume.id)
             except Exception as e:
-                self._handler.handle_error(e.message)
+                self._handler.handle_error(str(e))
 
     def get_item_details(self, item):
         result = dict()
@@ -41,8 +42,15 @@ class VolumesController(BaseController):
                         if isinstance(info, boto.ec2.RegionInfo):
                             info = info.name
                         result[key] = str(info)
+
+                filter = {'block-device-mapping.volume-id': item.id}
+                volumesReservations = self._conn.get_all_instances(filters=filter)
+                volumesInstances = [i for r in volumesReservations for i in r.instances]
+                ids = [i.id for i in volumesInstances]
+                if len(ids) > 0:
+                    result['attached'] = " ".join(ids)
         except Exception as e:
-            self._handler.handle_error(e.message);
+            self._handler.handle_error(e);
         return result
 
     def _build_items_dict(self):

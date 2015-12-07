@@ -1,18 +1,15 @@
 from PyQt5.QtWidgets import QWidget, QLabel
 from PyQt5.QtGui import QFont
 from gen.gui.instances_view import Ui_Form
-from handlers.GuiHandler import GuiHandler
-from PyQt5.QtCore import pyqtSignal
 
 
 class BaseBlockView(QWidget):
 
-    def __init__(self, conn, controller, consoleCallback):
+    def __init__(self, conn, controller, handler=None):
         super(QWidget, self).__init__()
 
         # Attributes
-        self._handler = GuiHandler(30, consoleCallback)
-        self._controller = controller(conn=conn, handler=self._handler)
+        self._controller = controller(conn=conn, handler=handler)
         self._form_label_font = QFont()
         self._form_label_font.setBold(True)
 

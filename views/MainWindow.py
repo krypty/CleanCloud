@@ -6,6 +6,7 @@ from views.ImageView import ImageView
 from views.VolumesView import VolumesView
 from PyQt5.QtCore import QCoreApplication
 from PyQt5.QtCore import pyqtSlot
+from handlers.GuiHandler import GuiHandler
 
 
 # inflate the mainwindow.py gui (generated from res/gui/mainwindow.ui)
@@ -21,11 +22,11 @@ class MainWindow(QMainWindow):
         # Set up the user interface from Designer.
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-
-        self._instances_view = InstancesView(conn=self._conn, consoleCallback=self._on_new_console_message)
-        self._elastic_ip_view = ElasticIPView(conn=self._conn, consoleCallback=self._on_new_console_message)
-        self._image_view = ImageView(conn=self._conn, consoleCallback=self._on_new_console_message)
-        self._volumes_view = VolumesView(conn=self._conn, consoleCallback=self._on_new_console_message)
+        self._handler = GuiHandler(30, self._on_new_console_message)
+        self._instances_view = InstancesView(conn=self._conn, handler=self._handler)
+        self._elastic_ip_view = ElasticIPView(conn=self._conn, handler=self._handler)
+        self._image_view = ImageView(conn=self._conn, handler=self._handler)
+        self._volumes_view = VolumesView(conn=self._conn, handler=self._handler)
 
         self._views = [
             self._instances_view,
