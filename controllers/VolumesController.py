@@ -28,7 +28,7 @@ class VolumesController(BaseController):
                 self._conn.delete_volume(volume.id)
                 self._handler.handle_message("Volume %s has been deleted" % volume.id)
             except Exception as e:
-                self._handler.handle_error(str(e))
+                self._handler.handle_error(e.message)
 
     def get_item_details(self, item):
         result = dict()
