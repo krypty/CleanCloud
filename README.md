@@ -1,6 +1,8 @@
 # CleanCloud
 Mini project for the Cloud Computing course in HES-SO Master. This PyQt program aims to easily detect and remove unused resources in your AWS.
 
+![screenshot](/screenshot.png?raw=true)
+
 ## Developement
 ### versions used
 - Python 3.5
